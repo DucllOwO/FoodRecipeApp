@@ -13,7 +13,8 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".view.home.HomeActivity"
-            android:theme="@style/AppTheme">
+            android:theme="@style/AppTheme"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
