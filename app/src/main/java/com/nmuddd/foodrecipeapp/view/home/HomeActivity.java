@@ -33,6 +33,7 @@ import butterknife.ButterKnife;
 
 public class HomeActivity extends AppCompatActivity implements HomeView {
 
+    HomeActivity_ViewBinding homeActivityViewBinding;
     public static final String API_KEY = "1a6fb5e756684298b67fbd7e9d8ffd77";
     
     public static final String EXTRA_CATEGORY = "category";

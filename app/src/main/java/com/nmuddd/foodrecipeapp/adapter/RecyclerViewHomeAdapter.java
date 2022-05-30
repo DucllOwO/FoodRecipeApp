@@ -12,6 +12,7 @@ import com.nmuddd.foodrecipeapp.R;
 import com.nmuddd.foodrecipeapp.model.Categories;
 import com.squareup.picasso.Picasso;
 import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 

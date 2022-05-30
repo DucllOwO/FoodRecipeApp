@@ -32,7 +32,7 @@ public class DetailPresenter {
                                 try {
                                     view.setMeal(response.body().getMeals().get(0));
                                 } catch (Exception e) {
-                                    Toast.makeText(context, "Món ăn không tồn tại", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(context, "Món ăn" + mealName + " không tồn tại", Toast.LENGTH_SHORT).show();
                                 }
                             } else {
                                 view.onErrorLoading(response.message());
