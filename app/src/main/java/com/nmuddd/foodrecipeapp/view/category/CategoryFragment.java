@@ -20,7 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.nmuddd.foodrecipeapp.R;
 import com.nmuddd.foodrecipeapp.Utils.Utils;
-import com.nmuddd.foodrecipeapp.adapter.RecyclerViewMealByCategory;
+import com.nmuddd.foodrecipeapp.adapter.RecyclerViewMealByCategoryAdapter;
 import com.nmuddd.foodrecipeapp.database.FavoriteRepository;
 import com.nmuddd.foodrecipeapp.model.Meals;
 import com.nmuddd.foodrecipeapp.view.detail.DetailActivity;
@@ -93,8 +93,8 @@ public class CategoryFragment extends Fragment implements CategoryView {
 
     @Override
     public void setMeals(List<Meals.Meal> meals) {
-        RecyclerViewMealByCategory adapter =
-                new RecyclerViewMealByCategory(getActivity(), meals, repository);
+        RecyclerViewMealByCategoryAdapter adapter =
+                new RecyclerViewMealByCategoryAdapter(getActivity(), meals, repository);
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
         recyclerView.setClipToPadding(false);
         recyclerView.setAdapter(adapter);

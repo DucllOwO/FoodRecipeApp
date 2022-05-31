@@ -21,14 +21,14 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class RecyclerViewMealByCategory extends RecyclerView.Adapter<RecyclerViewMealByCategory.RecyclerViewHolder> {
+public class RecyclerViewMealByCategoryAdapter extends RecyclerView.Adapter<RecyclerViewMealByCategoryAdapter.RecyclerViewHolder> {
 
     private List<Meals.Meal> meals;
     private Context context;
     private static ClickListener clickListener;
     private FavoriteRepository repository;
 
-    public RecyclerViewMealByCategory(Context context, List<Meals.Meal> meals, FavoriteRepository repository) {
+    public RecyclerViewMealByCategoryAdapter(Context context, List<Meals.Meal> meals, FavoriteRepository repository) {
         this.meals = meals;
         this.context = context;
         this.repository = repository;
@@ -94,7 +94,7 @@ public class RecyclerViewMealByCategory extends RecyclerView.Adapter<RecyclerVie
 
 
     public void setOnItemClickListener(ClickListener clickListener) {
-        RecyclerViewMealByCategory.clickListener = clickListener;
+        RecyclerViewMealByCategoryAdapter.clickListener = clickListener;
     }
 
 

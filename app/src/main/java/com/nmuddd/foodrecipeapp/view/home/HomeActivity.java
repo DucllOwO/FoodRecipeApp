@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
@@ -151,6 +152,16 @@ public class HomeActivity extends AppCompatActivity implements HomeView {
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(HomeActivity.this);
         recyclerSearchItem.setLayoutManager(linearLayoutManager);
+
+        recyclerViewSearchItemAdapter.setOnItemClickListener(new RecyclerViewSearchItemAdapter.ClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+                int positionMeal = recyclerSearchItem.getChildAdapterPosition(view);
+                Intent intent = new Intent(getApplicationContext(), DetailActivity.class);
+                intent.putExtra(EXTRA_DETAIL, recyclerViewSearchItemAdapter.getMeal(positionMeal).getStrMeal());
+                startActivity(intent);
+            }
+        });
     }
 
     @Override

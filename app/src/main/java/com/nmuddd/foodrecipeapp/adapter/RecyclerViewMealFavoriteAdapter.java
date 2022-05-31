@@ -20,14 +20,14 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class RecyclerViewMealFavorite extends RecyclerView.Adapter<RecyclerViewMealFavorite.RecyclerViewHolder> {
+public class RecyclerViewMealFavoriteAdapter extends RecyclerView.Adapter<RecyclerViewMealFavoriteAdapter.RecyclerViewHolder> {
 
     private List<MealFavorite> meals;
     private Context context;
     private static ClickListener clickListener;
     private FavoriteRepository repository;
 
-    public RecyclerViewMealFavorite(Context context, List<MealFavorite> meals, FavoriteRepository repository) {
+    public RecyclerViewMealFavoriteAdapter(Context context, List<MealFavorite> meals, FavoriteRepository repository) {
         this.meals = meals;
         this.context = context;
         this.repository = repository;
@@ -91,7 +91,7 @@ public class RecyclerViewMealFavorite extends RecyclerView.Adapter<RecyclerViewM
 
 
     public void setOnItemClickListener(ClickListener clickListener) {
-        RecyclerViewMealFavorite.clickListener = clickListener;
+        RecyclerViewMealFavoriteAdapter.clickListener = clickListener;
     }
 
 

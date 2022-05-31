@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.nmuddd.foodrecipeapp.R;
-import com.nmuddd.foodrecipeapp.adapter.RecyclerViewMealFavorite;
+import com.nmuddd.foodrecipeapp.adapter.RecyclerViewMealFavoriteAdapter;
 import com.nmuddd.foodrecipeapp.database.FavoriteRepository;
 import com.nmuddd.foodrecipeapp.view.detail.DetailActivity;
 
@@ -50,7 +50,7 @@ public class FavoriteActivity extends AppCompatActivity {
     
     void getFavoriteList() {
         repository = new FavoriteRepository(getApplication());
-        RecyclerViewMealFavorite adapter = new RecyclerViewMealFavorite(this, repository.select(), repository);
+        RecyclerViewMealFavoriteAdapter adapter = new RecyclerViewMealFavoriteAdapter(this, repository.select(), repository);
         recyclerView.setAdapter(adapter);
 
         adapter.setOnItemClickListener((view, position) -> {

@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import androidx.annotation.NonNull;
@@ -21,7 +22,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class RecyclerViewSearchItemAdapter extends RecyclerView.Adapter<RecyclerViewSearchItemAdapter.RecyclerViewHolder> {
-    private static RecyclerViewSearchItemAdapter.ClickListener clickListener;
+    private static ClickListener clickListener;
     private  List<Meals.Meal> meals;
     private Context context;
     public RecyclerViewSearchItemAdapter(Context context,  List<Meals.Meal> meals) {
@@ -51,6 +52,11 @@ public class RecyclerViewSearchItemAdapter extends RecyclerView.Adapter<Recycler
         return meals.size();
     }
 
+    public Meals.Meal getMeal(int position) {
+        return meals.get(position);
+    }
+
+
 
     static class RecyclerViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         @BindView(R.id.mealImageSearchItem)
@@ -65,15 +71,14 @@ public class RecyclerViewSearchItemAdapter extends RecyclerView.Adapter<Recycler
 
         @Override
         public void onClick(View v) {
-            v.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                }
-            });
             clickListener.onClick(v, getAdapterPosition());
         }
     }
+
+    public void setOnItemClickListener(RecyclerViewSearchItemAdapter.ClickListener clickListener) {
+        RecyclerViewSearchItemAdapter.clickListener = clickListener;
+    }
+
     public interface ClickListener {
         void onClick(View view, int position);
     }
