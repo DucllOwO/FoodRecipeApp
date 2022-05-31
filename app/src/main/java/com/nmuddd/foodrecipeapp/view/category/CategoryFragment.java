@@ -19,7 +19,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.nmuddd.foodrecipeapp.R;
-import com.nmuddd.foodrecipeapp.Utils;
+import com.nmuddd.foodrecipeapp.Utils.Utils;
 import com.nmuddd.foodrecipeapp.adapter.RecyclerViewMealByCategory;
 import com.nmuddd.foodrecipeapp.database.FavoriteRepository;
 import com.nmuddd.foodrecipeapp.model.Meals;

@@ -49,7 +49,7 @@
                 android:textAllCaps="true"
                 android:textColor="@color/colorWhite"
                 android:textSize="17sp" />-->
-            <com.nmuddd.foodrecipeapp.StrokedTextView
+            <com.nmuddd.foodrecipeapp.Utils.StrokedTextView
                 android:id="@+id/mealName"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"

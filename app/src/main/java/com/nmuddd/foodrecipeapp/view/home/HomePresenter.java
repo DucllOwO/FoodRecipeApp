@@ -1,10 +1,16 @@
 package com.nmuddd.foodrecipeapp.view.home;
 
-import androidx.annotation.NonNull;
+import android.util.Log;
 
-import com.nmuddd.foodrecipeapp.Utils;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
+
+import com.nmuddd.foodrecipeapp.Utils.Utils;
+import com.nmuddd.foodrecipeapp.adapter.RecyclerViewSearchItemAdapter;
 import com.nmuddd.foodrecipeapp.model.Categories;
 import com.nmuddd.foodrecipeapp.model.Meals;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -17,12 +23,12 @@ class HomePresenter {
     public HomePresenter(HomeView view) {
         this.view = view;
     }
-
-    void getMeals() {
+    // get random meal
+    void getRandomMeals() {
 
         view.showLoading();
 
-        Call<Meals> mealsCall = Utils.getApi().getMeal();
+        Call<Meals> mealsCall = Utils.getApi().getRandomMeal();
         mealsCall.enqueue(new Callback<Meals>() {
             @Override
             public void onResponse(@NonNull Call<Meals> call, @NonNull Response<Meals> response) {
@@ -45,7 +51,39 @@ class HomePresenter {
             }
         });
     }
+    public static List<Meals.Meal> mealList;
 
+    void getMealsByName(String mealName) {
+        Log.i("AAA", "getMealsByName execute");
+
+        Call<Meals> mealsCall = Utils.getApi().getMealByName(mealName);
+        mealsCall.enqueue(new Callback<Meals>() {
+            @Override
+            public void onResponse(@NonNull Call<Meals> call, @NonNull Response<Meals> response) {
+                Log.i("AAA", "onResponse execute duoc ne");
+                Log.i("AAA", response.body().getMeals().get(0).getStrMeal());
+                if (response.isSuccessful() && response.body() != null) {
+                    try {
+                        //view.setMeal(response.body().getMeals());
+                        view.setMealSearchItem(response.body().getMeals());
+                    } catch (Exception e) {
+                        Log.i("AAA", "onResponse execute exception");
+                    }
+
+                }
+                else {
+                    view.onErrorLoading(response.message());
+                }
+                Log.i("AAA", "onResponse execute hoan thanh");
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<Meals> call, @NonNull Throwable t) {
+                Log.i("AAA", "OnFailute execute");
+                view.onErrorLoading(t.getLocalizedMessage());
+            }
+        });
+    }
 
     void getCategories() {
 
@@ -75,6 +113,7 @@ class HomePresenter {
             }
         });
     }
+
 
 
 }

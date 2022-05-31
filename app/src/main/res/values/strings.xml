@@ -14,4 +14,6 @@
     <string name="interstitial_ads_id">ca-app-pub-7622707640153634/9090737130</string>
     <string name="interstitial_video_ads_id">ca-app-pub-7622707640153634/9554126783</string>
     <string name="input_meal_name">Nhập tên món ăn</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

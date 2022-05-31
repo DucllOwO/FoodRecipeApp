@@ -1,4 +1,4 @@
-package com.nmuddd.foodrecipeapp;
+package com.nmuddd.foodrecipeapp.Utils;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -6,6 +6,8 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.widget.Button;
+
+import com.nmuddd.foodrecipeapp.R;
 
 public class StrokedTextView extends androidx.appcompat.widget.AppCompatButton {
 

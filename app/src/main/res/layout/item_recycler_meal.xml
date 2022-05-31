@@ -30,7 +30,6 @@
             android:layout_height="90dp"/>
         <ImageView
             android:id="@+id/love"
-            android:tint="@color/colorAccent"
             android:src="@drawable/ic_favorite_border"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -40,7 +39,8 @@
             android:clickable="true"
             android:focusable="true"
             android:background="?android:attr/selectableItemBackgroundBorderless"
-            tools:ignore="NewApi" />
+            tools:ignore="NewApi"
+            app:tint="@color/colorAccent" />
         <TextView
             android:text="@string/meal_categories"
             android:textSize="16sp"

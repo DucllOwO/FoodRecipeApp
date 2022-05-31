@@ -7,12 +7,15 @@
         <entry key="..\:/Tai_Lieu/NM_di_dong/project-chinh-0/app/src/main/res/layout/activity_category.xml" value="0.103125" />
         <entry key="..\:/Tai_Lieu/NM_di_dong/project-chinh-0/app/src/main/res/layout/activity_detail.xml" value="0.103125" />
         <entry key="..\:/Tai_Lieu/NM_di_dong/project-chinh-0/app/src/main/res/layout/activity_favorite.xml" value="0.103125" />
-        <entry key="..\:/Tai_Lieu/NM_di_dong/project-chinh-0/app/src/main/res/layout/activity_home.xml" value="0.264" />
+        <entry key="..\:/Tai_Lieu/NM_di_dong/project-chinh-0/app/src/main/res/layout/activity_home.xml" value="0.24570446735395188" />
         <entry key="..\:/Tai_Lieu/NM_di_dong/project-chinh-0/app/src/main/res/layout/fragment_category.xml" value="0.103125" />
+        <entry key="..\:/Tai_Lieu/NM_di_dong/project-chinh-0/app/src/main/res/layout/fragment_search_information.xml" value="0.2" />
+        <entry key="..\:/Tai_Lieu/NM_di_dong/project-chinh-0/app/src/main/res/layout/fragment_search_item.xml" value="0.1" />
         <entry key="..\:/Tai_Lieu/NM_di_dong/project-chinh-0/app/src/main/res/layout/item_recycler_category.xml" value="0.103125" />
         <entry key="..\:/Tai_Lieu/NM_di_dong/project-chinh-0/app/src/main/res/layout/item_recycler_category_shimmer.xml" value="0.103125" />
-        <entry key="..\:/Tai_Lieu/NM_di_dong/project-chinh-0/app/src/main/res/layout/item_recycler_meal.xml" value="0.103125" />
-        <entry key="..\:/Tai_Lieu/NM_di_dong/project-chinh-0/app/src/main/res/layout/item_view_pager_header.xml" value="0.5568760611205433" />
+        <entry key="..\:/Tai_Lieu/NM_di_dong/project-chinh-0/app/src/main/res/layout/item_recycler_meal.xml" value="0.264" />
+        <entry key="..\:/Tai_Lieu/NM_di_dong/project-chinh-0/app/src/main/res/layout/item_recycler_search.xml" value="0.25" />
+        <entry key="..\:/Tai_Lieu/NM_di_dong/project-chinh-0/app/src/main/res/layout/item_view_pager_header.xml" value="0.4" />
         <entry key="..\:/Tai_Lieu/NM_di_dong/project-chinh-0/app/src/main/res/layout/item_view_pager_header_shimmer.xml" value="0.103125" />
         <entry key="..\:/Tai_Lieu/NM_di_dong/project-chinh-0/app/src/main/res/menu/menu_detail.xml" value="0.103125" />
       </map>

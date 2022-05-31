@@ -12,5 +12,6 @@ public interface HomeView {
     void hideLoading();
     void setMeal(List<Meals.Meal> meal);
     void setCategory(List<Categories.Category> category);
+    void setMealSearchItem(List<Meals.Meal> meal);
     void onErrorLoading(String message);
 }

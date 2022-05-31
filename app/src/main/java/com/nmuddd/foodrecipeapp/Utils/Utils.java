@@ -1,4 +1,4 @@
-package com.nmuddd.foodrecipeapp;
+package com.nmuddd.foodrecipeapp.Utils;
 
 import android.app.Activity;
 import android.app.AlertDialog;

@@ -2,6 +2,7 @@ package com.nmuddd.foodrecipeapp.view.home;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,12 +13,14 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import com.nmuddd.foodrecipeapp.R;
-import com.nmuddd.foodrecipeapp.Utils;
+import com.nmuddd.foodrecipeapp.Utils.Utils;
 import com.nmuddd.foodrecipeapp.adapter.RecyclerViewHomeAdapter;
+import com.nmuddd.foodrecipeapp.adapter.RecyclerViewSearchItemAdapter;
 import com.nmuddd.foodrecipeapp.adapter.ViewPagerHeaderAdapter;
 import com.nmuddd.foodrecipeapp.model.Categories;
 import com.nmuddd.foodrecipeapp.model.Meals;
@@ -43,6 +46,7 @@ public class HomeActivity extends AppCompatActivity implements HomeView {
     @BindView(R.id.recyclerCategory)
     RecyclerView recyclerViewCategory;
     @BindView(R.id.favorite) ImageView favorite;
+    @BindView(R.id.recyclerSearchItem) RecyclerView recyclerSearchItem;
 
     HomePresenter presenter;
 
@@ -56,21 +60,33 @@ public class HomeActivity extends AppCompatActivity implements HomeView {
             startActivity(new Intent(this, FavoriteActivity.class));
         });
         presenter = new HomePresenter(this);
-        presenter.getMeals();
+        presenter.getRandomMeals();
         presenter.getCategories();
 
         SearchView searchView = findViewById(R.id.searchView);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
-                Intent intent = new Intent(getApplicationContext(), DetailActivity.class);
+                presenter.getMealsByName(s);
+                Log.i("AAA", "Thoat ra khoi presenter");
+                /*RecyclerViewSearchItemAdapter recyclerViewSearchItemAdapter = new RecyclerViewSearchItemAdapter(HomeActivity.this,  HomePresenter.mealList);
+                //Log.i("AAA", presenter.getMealsByName("beef").toString());
+                recyclerSearchItem.setAdapter(recyclerViewSearchItemAdapter);
+
+                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(HomeActivity.this);
+                recyclerSearchItem.setLayoutManager(linearLayoutManager);*/
+
+                /*Intent intent = new Intent(getApplicationContext(), DetailActivity.class);
                 intent.putExtra(EXTRA_DETAIL, searchView.getQuery().toString());
                 startActivity(intent);
+                return true;*/
                 return true;
             }
 
             @Override
             public boolean onQueryTextChange(String s) {
+
+
                 return false;
             }
         });
@@ -125,6 +141,16 @@ public class HomeActivity extends AppCompatActivity implements HomeView {
             intent.putExtra(EXTRA_DETAIL, mealName.getText().toString());
             startActivity(intent);
         });
+    }
+
+    @Override
+    public void setMealSearchItem(List<Meals.Meal> meal) {
+        RecyclerViewSearchItemAdapter recyclerViewSearchItemAdapter = new RecyclerViewSearchItemAdapter(HomeActivity.this,  meal);
+        //Log.i("AAA", presenter.getMealsByName("beef").toString());
+        recyclerSearchItem.setAdapter(recyclerViewSearchItemAdapter);
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(HomeActivity.this);
+        recyclerSearchItem.setLayoutManager(linearLayoutManager);
     }
 
     @Override

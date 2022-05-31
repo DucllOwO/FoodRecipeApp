@@ -12,9 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".ItemRecyclerSearch"
+            android:exported="false" />
+        <activity
             android:name=".view.home.HomeActivity"
-            android:theme="@style/AppTheme"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
@@ -24,17 +27,16 @@
         </activity>
         <activity
             android:name=".view.category.CategoryActivity"
-            android:theme="@style/AppTheme"
+            android:label="Category"
             android:screenOrientation="portrait"
-            android:label="Category"/>
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".view.detail.DetailActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".view.favorite.FavoriteActivity"
-            android:theme="@style/AppTheme"
-            android:label="Favorite"/>
-
+            android:label="Favorite"
+            android:theme="@style/AppTheme" />
     </application>
 
 </manifest>

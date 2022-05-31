@@ -55,7 +55,6 @@
             <ImageView
                 android:id="@+id/favorite"
                 android:src="@drawable/ic_favorite"
-                android:tint="@color/colorWhite"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_marginTop="30dp"
@@ -63,29 +62,34 @@
                 android:layout_marginEnd="16dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                app:tint="@color/colorWhite" />
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardSearch"
-                android:clickable="true"
-                android:focusable="true"
                 android:layout_below="@id/title"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
                 android:layout_marginTop="15dp"
-                app:cardBackgroundColor="@color/colorPrimaryDark"
                 app:cardCornerRadius="10dp"
                 app:cardElevation="0dp">
-
-                <androidx.appcompat.widget.SearchView
-                    android:id="@+id/searchView"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@color/cardview_light_background"
-                    app:queryHint="@string/input_meal_name"
-                    app:iconifiedByDefault="false"/>
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <androidx.appcompat.widget.SearchView
+                        android:id="@+id/searchView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/cardview_light_background"
+                        app:queryHint="@string/input_meal_name"
+                        app:iconifiedByDefault="false"/>
+                    <include layout="@layout/fragment_search_item"
+                        />
+                </LinearLayout>
+
             </androidx.cardview.widget.CardView>
 
 

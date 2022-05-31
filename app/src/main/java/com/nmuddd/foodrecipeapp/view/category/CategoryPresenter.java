@@ -2,7 +2,7 @@ package com.nmuddd.foodrecipeapp.view.category;
 
 import androidx.annotation.NonNull;
 
-import com.nmuddd.foodrecipeapp.Utils;
+import com.nmuddd.foodrecipeapp.Utils.Utils;
 import com.nmuddd.foodrecipeapp.model.Meals;
 
 import retrofit2.Call;
