@@ -1,17 +1,29 @@
 package com.nmuddd.foodrecipeapp.database;
 
-import androidx.room.Dao;
+import android.util.Log;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.nmuddd.foodrecipeapp.database.Listeners.RetrievalEventListener;
 import com.nmuddd.foodrecipeapp.model.MealFavorite;
 
-public class MealFavoriteDAO extends FirebaseDAO<MealFavorite> {
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
 
+public class MealFavoriteDAO extends FirebaseDAO<MealFavorite> {
     public MealFavoriteDAO() {
         super("MealFavorite");
     }
-
+    public List<MealFavorite> mealFavoriteList;
     @Override
     protected void parseDataSnapshot(DataSnapshot dataSnapshot, RetrievalEventListener<MealFavorite> retrievalEventListener) {
         final MealFavorite mealFavorite = new MealFavorite();
@@ -27,4 +39,5 @@ public class MealFavoriteDAO extends FirebaseDAO<MealFavorite> {
         // Now we have parsed all of the attributes of the Student object. We will feed it to the callback
         retrievalEventListener.OnDataRetrieved(mealFavorite);
     }
+
 }

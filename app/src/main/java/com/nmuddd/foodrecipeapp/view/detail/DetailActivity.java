@@ -23,7 +23,6 @@ import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.firebase.database.DatabaseReference;
 import com.nmuddd.foodrecipeapp.R;
 import com.nmuddd.foodrecipeapp.Utils.Utils;
-import com.nmuddd.foodrecipeapp.database.FavoriteRepository;
 import com.nmuddd.foodrecipeapp.database.MealFavoriteDAO;
 import com.nmuddd.foodrecipeapp.database.Listeners.TaskListener;
 import com.nmuddd.foodrecipeapp.model.MealFavorite;
@@ -70,8 +69,6 @@ public class DetailActivity extends AppCompatActivity implements DetailView {
     TextView source;
 
     public DatabaseReference mReference;
-
-    private FavoriteRepository repository;
     private Meals.Meal meal;
     MenuItem favoriteItem;
     String strMealName;

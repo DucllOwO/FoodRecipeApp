@@ -20,31 +20,11 @@ import java.util.List;
 
 public abstract class FirebaseDAO<T> {
     private static String DatabaseURLScheme = "https://food-recipe-app-374eb-default-rtdb.asia-southeast1.firebasedatabase.app";
-    protected static final DatabaseReference dbReference = FirebaseDatabase.getInstance(DatabaseURLScheme).getReference("database").child("mealFavorite");
+    protected static final DatabaseReference dbReference = FirebaseDatabase.getInstance(DatabaseURLScheme).getReference();
     protected String tableName;
     public FirebaseDAO(String tableName)
     {
         this.tableName = tableName;
-    }
-
-    public void get(String id, final RetrievalEventListener<T> retrievalEventListener) {
-        DatabaseReference rowReference = dbReference.child(tableName).child(id);
-        Query query = rowReference;
-        rowReference.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                parseDataSnapshot(dataSnapshot, new RetrievalEventListener<T>() {
-                    @Override
-                    public void OnDataRetrieved(T t) {
-                        retrievalEventListener.OnDataRetrieved(t);
-                    }
-                });
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-            }
-        });
     }
 
     public String GetNewKey()
@@ -85,6 +65,7 @@ public abstract class FirebaseDAO<T> {
             }
         });
     }
+
     public void save(T t, String id, final TaskListener taskListener){
         Task<Void> task = dbReference.child(tableName).child(id).setValue(t);
         task.addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -100,8 +81,22 @@ public abstract class FirebaseDAO<T> {
             }
         });
     }
+    //id này là id của cái phần cần delete chứ k phải id trên firebase
+    //idName là tên thuộc tính id của element cần xoá vd của meal favorite là idMeal
+    public void delete(String id, String idName){
+        Query query = dbReference.child(tableName).orderByChild(idName).equalTo(id);
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot item : dataSnapshot.getChildren()) {
+                    item.getRef().removeValue();
+                }
+            }
 
-    public void delete(String id, TaskListener taskListener){
-        save(null, id, taskListener);
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 }

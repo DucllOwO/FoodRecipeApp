@@ -3,6 +3,7 @@ package com.nmuddd.foodrecipeapp.view.favorite;
 import static com.nmuddd.foodrecipeapp.view.home.HomeActivity.EXTRA_DETAIL;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.TextView;
 
@@ -14,8 +15,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.nmuddd.foodrecipeapp.R;
 import com.nmuddd.foodrecipeapp.adapter.RecyclerViewMealFavoriteAdapter;
-import com.nmuddd.foodrecipeapp.database.FavoriteRepository;
+import com.nmuddd.foodrecipeapp.database.Listeners.RetrievalEventListener;
+import com.nmuddd.foodrecipeapp.database.MealFavoriteDAO;
+import com.nmuddd.foodrecipeapp.model.MealFavorite;
 import com.nmuddd.foodrecipeapp.view.detail.DetailActivity;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -27,8 +32,8 @@ public class FavoriteActivity extends AppCompatActivity {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
-    
-    FavoriteRepository repository;
+
+    List<MealFavorite> mealFavoriteList;
     
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -41,16 +46,22 @@ public class FavoriteActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        
-        repository = new FavoriteRepository(getApplication());
+
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
         recyclerView.setClipToPadding(false);
         
     }
     
     void getFavoriteList() {
-        repository = new FavoriteRepository(getApplication());
-        RecyclerViewMealFavoriteAdapter adapter = new RecyclerViewMealFavoriteAdapter(this, repository.select(), repository);
+        MealFavoriteDAO mealFavoriteDAO = new MealFavoriteDAO();
+        mealFavoriteDAO.getAll(new RetrievalEventListener<List<MealFavorite>>() {
+            @Override
+            public void OnDataRetrieved(List<MealFavorite> mealFavorites) {
+                mealFavoriteList = mealFavorites;
+                Log.i("AAAA", "Meal favorite DAO lay du lieu thanh cong");
+            }
+        });
+        RecyclerViewMealFavoriteAdapter adapter = new RecyclerViewMealFavoriteAdapter(this, mealFavoriteList);
         recyclerView.setAdapter(adapter);
 
         adapter.setOnItemClickListener((view, position) -> {

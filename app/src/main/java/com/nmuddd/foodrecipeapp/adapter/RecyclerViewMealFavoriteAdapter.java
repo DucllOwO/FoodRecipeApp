@@ -1,6 +1,7 @@
 package com.nmuddd.foodrecipeapp.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.nmuddd.foodrecipeapp.R;
-import com.nmuddd.foodrecipeapp.database.FavoriteRepository;
+import com.nmuddd.foodrecipeapp.database.Listeners.TaskListener;
+import com.nmuddd.foodrecipeapp.database.MealFavoriteDAO;
 import com.nmuddd.foodrecipeapp.model.MealFavorite;
 import com.squareup.picasso.Picasso;
 
@@ -19,18 +21,17 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import retrofit2.http.Query;
 
 public class RecyclerViewMealFavoriteAdapter extends RecyclerView.Adapter<RecyclerViewMealFavoriteAdapter.RecyclerViewHolder> {
 
     private List<MealFavorite> meals;
     private Context context;
     private static ClickListener clickListener;
-    private FavoriteRepository repository;
 
-    public RecyclerViewMealFavoriteAdapter(Context context, List<MealFavorite> meals, FavoriteRepository repository) {
+    public RecyclerViewMealFavoriteAdapter(Context context, List<MealFavorite> meals) {
         this.meals = meals;
         this.context = context;
-        this.repository = repository;
     }
 
     @NonNull
@@ -43,21 +44,16 @@ public class RecyclerViewMealFavoriteAdapter extends RecyclerView.Adapter<Recycl
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerViewHolder viewHolder, int i) {
-
+        String idMeal = meals.get(i).idMeal;
         String strMealThumb = meals.get(i).strMealThumb;
         Picasso.get().load(strMealThumb).placeholder(R.drawable.shadow_bottom_to_top).into(viewHolder.mealThumb);
 
         String strMealName = meals.get(i).strMeal;
         viewHolder.mealName.setText(strMealName);
 
-        if (isFavorite(strMealName)) {
-            viewHolder.love.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_favorite));
-        } else {
-            viewHolder.love.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_favorite_border));
-        }
-
         viewHolder.love.setOnClickListener(v -> {
-            repository.delete(strMealName);
+            MealFavoriteDAO mealFavoriteDAO = new MealFavoriteDAO();
+            mealFavoriteDAO.delete(idMeal, "idMeal");
             meals.remove(i);
             notifyItemRemoved(i);
             notifyDataSetChanged();
@@ -99,7 +95,4 @@ public class RecyclerViewMealFavoriteAdapter extends RecyclerView.Adapter<Recycl
         void onClick(View view, int position);
     }
 
-    private boolean isFavorite(String strMealName) {
-        return repository.isFavorite(strMealName);
-    }
 }
