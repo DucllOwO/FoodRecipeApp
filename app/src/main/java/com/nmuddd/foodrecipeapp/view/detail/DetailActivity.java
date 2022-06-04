@@ -8,6 +8,7 @@ import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,9 +20,12 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.ViewCompat;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
+import com.google.firebase.database.DatabaseReference;
 import com.nmuddd.foodrecipeapp.R;
 import com.nmuddd.foodrecipeapp.Utils.Utils;
 import com.nmuddd.foodrecipeapp.database.FavoriteRepository;
+import com.nmuddd.foodrecipeapp.database.MealFavoriteDAO;
+import com.nmuddd.foodrecipeapp.database.Listeners.TaskListener;
 import com.nmuddd.foodrecipeapp.model.MealFavorite;
 import com.nmuddd.foodrecipeapp.model.Meals;
 import com.squareup.picasso.Picasso;
@@ -65,6 +69,8 @@ public class DetailActivity extends AppCompatActivity implements DetailView {
     @BindView(R.id.source)
     TextView source;
 
+    public DatabaseReference mReference;
+
     private FavoriteRepository repository;
     private Meals.Meal meal;
     MenuItem favoriteItem;
@@ -76,7 +82,7 @@ public class DetailActivity extends AppCompatActivity implements DetailView {
         setContentView(R.layout.activity_detail);
         ButterKnife.bind(this);
 
-        repository = new FavoriteRepository(getApplication());
+        //repository = new FavoriteRepository(getApplication());
 
         setupActionBar();
 
@@ -120,7 +126,7 @@ public class DetailActivity extends AppCompatActivity implements DetailView {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_detail, menu);
         favoriteItem = menu.findItem(R.id.favorite);
-        setFavoriteItem();
+        //setFavoriteItem();
         Drawable favoriteItemColor = favoriteItem.getIcon();
         setupColorActionBarIcon(favoriteItemColor);
         return true;
@@ -141,31 +147,50 @@ public class DetailActivity extends AppCompatActivity implements DetailView {
     }
 
     private void addOrRemoveToFavorite() {
-        if (isFavorite()) {
-            repository.delete(meal.getStrMeal());
-        } else {
+        /*if (isFavorite()) {
+            //repository.delete(meal.getStrMeal());
+        } else {*/
             MealFavorite mealFavorite = new MealFavorite();
             mealFavorite.idMeal = meal.getIdMeal();
             mealFavorite.strMeal = meal.getStrMeal();
             mealFavorite.strMealThumb = meal.getStrMealThumb();
-            repository.insert(mealFavorite);
-        }
+            //repository.insert(mealFavorite);
 
-        setFavoriteItem();
+            MealFavoriteDAO favoriteDAO = new MealFavoriteDAO();
+            favoriteDAO.save(mealFavorite, favoriteDAO.GetNewKey(), new TaskListener() {
+                @Override
+                public void OnSuccess() {
+                    Log.i("AAAA", "save du lieu thanh cong ");
+                }
+
+                @Override
+                public void OnFail() {
+                    Log.i("AAAA", "save du lieu that bai");
+                }
+            });
+
+            /*//Log.i("AAAA", FirebaseApp.getInstance().getOptions().getDatabaseUrl());
+            FirebaseDatabase database = FirebaseDatabase.getInstance("https://food-recipe-app-374eb-default-rtdb.asia-southeast1.firebasedatabase.app");
+            DatabaseReference ref = database.getReference("database");
+            DatabaseReference mealFavoriteRef = ref.child("mealFavorite");
+            mealFavoriteRef.push().setValue(mealFavorite);*/
+        //}
+
+        //setFavoriteItem();
 
     }
 
-    private boolean isFavorite() {
+    /*private boolean isFavorite() {
         return repository.isFavorite(strMealName);
-    }
+    }*/
 
-    private void setFavoriteItem() {
+    /*private void setFavoriteItem() {
         if (isFavorite()) {
             favoriteItem.setIcon(getResources().getDrawable(R.drawable.ic_favorite));
         } else {
             favoriteItem.setIcon(getResources().getDrawable(R.drawable.ic_favorite_border));
         }
-    }
+    }*/
 
     @Override
     public void showLoading() {

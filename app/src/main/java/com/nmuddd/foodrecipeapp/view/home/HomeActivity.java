@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -70,25 +71,30 @@ public class HomeActivity extends AppCompatActivity implements HomeView {
             public boolean onQueryTextSubmit(String s) {
                 presenter.getMealsByName(s);
                 Log.i("AAA", "Thoat ra khoi presenter");
-                /*RecyclerViewSearchItemAdapter recyclerViewSearchItemAdapter = new RecyclerViewSearchItemAdapter(HomeActivity.this,  HomePresenter.mealList);
-                //Log.i("AAA", presenter.getMealsByName("beef").toString());
-                recyclerSearchItem.setAdapter(recyclerViewSearchItemAdapter);
 
-                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(HomeActivity.this);
-                recyclerSearchItem.setLayoutManager(linearLayoutManager);*/
-
-                /*Intent intent = new Intent(getApplicationContext(), DetailActivity.class);
-                intent.putExtra(EXTRA_DETAIL, searchView.getQuery().toString());
-                startActivity(intent);
-                return true;*/
                 return true;
             }
 
             @Override
             public boolean onQueryTextChange(String s) {
-
-
                 return false;
+            }
+        });
+
+        searchView.setOnQueryTextFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                Log.i("AAA", "on Focus Change");
+                //findViewById(R.id.recyclerSearchItem).setVisibility(View.INVISIBLE);
+            }
+        });
+
+        searchView.setOnCloseListener(new SearchView.OnCloseListener() {
+            @Override
+            public boolean onClose() {
+                Log.i("AAA", "on Close");
+                findViewById(R.id.recyclerSearchItem).setVisibility(View.INVISIBLE);
+                return true;
             }
         });
     }
