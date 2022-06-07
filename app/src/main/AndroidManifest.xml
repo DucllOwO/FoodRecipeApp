@@ -12,18 +12,27 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".ItemRecyclerSearch"
-            android:exported="false" />
-        <activity
-            android:name=".view.home.HomeActivity"
+            android:name=".view.login.SplashActivity"
             android:exported="true"
-            android:theme="@style/AppTheme">
+            android:theme="@style/AppTheme.NoActionBar">
+
+
+        </activity>
+        <activity
+            android:name=".view.login.LoginActivity"
+            android:exported="true"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".view.home.HomeActivity"
+            android:exported="true"
+            android:theme="@style/AppTheme">
         </activity>
         <activity
             android:name=".view.category.CategoryActivity"
